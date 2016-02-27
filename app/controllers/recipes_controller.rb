@@ -44,7 +44,8 @@ class RecipesController < ApplicationController
   
   private
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :ingredient, :direction)
+      params.require(:recipe).permit(:title, :description, :ingredient, :direction, 
+                                     ingredients_attributes: [:id, :name, :_destroy])
     end
     def set_recipe
       @recipe = Recipe.find(params[:id])
