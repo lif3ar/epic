@@ -2,10 +2,10 @@
   <div class="content">
     <div class="title-description-show">
       <div class="row">
-        <div class="small-4 columns">
-        #
+        <div class="small-5 columns">
+          <%= image_tag @recipe.avatar.url(:medium) %>
         </div>
-        <div class="small-8 columns">
+        <div class="small-7 columns">
           <div class="recipe-title-show">
             <h3><%= @recipe.title %></h3>
             <p><%= @recipe.description %></p>
@@ -34,4 +34,12 @@
       </div>
     </row>
   </div>
+  <% if user_signed_in? && current_user == @recipe.user %>
+    <div class="buttons">
+      <row>
+        <%= link_to "Edit Recipe", edit_recipe_path, class: "warning button" %>
+        <%= link_to "Delete recipe", @recipe, method: :delete, data: {confirm: "Are you sure?"}, class: "alert button" %>
+      </row>
+    </div>
+  <% end %>
 </div>

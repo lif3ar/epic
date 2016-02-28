@@ -1,0 +1,30 @@
+<%= form_for(@recipe, url: recipes_path, :html => {class: "form", role: "form", multipart: true}) do |f| %>
+  <label><h3>Title:</h3>
+  <%= f.text_field :title, placeholder: "Recipe title" %>
+  </label>
+  <label><h3>Description:</h3>
+  <%= f.text_area :description, placeholder: "Recipe description", rows: 8 %>
+  </label>
+  <fieldset class="large-6 columns" id="ingredients">
+    <%= f.fields_for :ingredients do |ingredient| %>
+      <%= render 'ingredient_fields', :f => ingredient %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Ingredient', f, :ingredients, class: "large button" %>
+    </div>
+  </fieldset>
+  <fieldset class="large-6 columns" id="ingredients">
+    <%= f.fields_for :directions do |direction| %>
+      <%= render 'direction_fields', :f => direction %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Step', f, :directions, class: "large button" %>
+    </div>
+  </fieldset>
+  <label><h3>Image:</h3>
+  <%= f.file_field :avatar %>
+  </label>
+  
+  <%= f.submit class: "large button" %><br/>
+  <%= link_to "Cancel", recipes_path, class: "secondary hollow button" %>
+<% end %>

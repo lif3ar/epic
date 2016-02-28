@@ -12,6 +12,7 @@ class RecipesController < ApplicationController
   
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
     if @recipe.save
       flash[:success] = "Recipe has been added"
       redirect_to recipe_path(@recipe)
@@ -40,13 +41,16 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+    flash[:notice] = "Recipe has been deleted"
+    redirect_to root_path
   end
   
   private
     def recipe_params
-      params.require(:recipe).permit(:title, :description, ingredients_attributes: [:id, :name, :_destroy],
-                                                           directions_attributes: [:id, :step, :_destroy])
+      params.require(:recipe).permit(:title, :description, :avatar, ingredients_attributes: [:id, :name, :_destroy],
+                                                                    directions_attributes: [:id, :step, :_destroy])
     end
     def set_recipe
       @recipe = Recipe.find(params[:id])

@@ -1,7 +1,15 @@
 <div class="container">
-  <ul>
   <% @recipes.each do |recipe| %>
-    <li><%= link_to recipe.title, recipe_path(recipe) %></li>
+      <div class="media-object stack-for-small">
+        <div class="media-object-section">
+          <div class="thumbnail">
+            <%= image_tag recipe.avatar.url(:medium) %>
+          </div>
+        </div>
+        <div class="media-object-section">
+          <h4><%= link_to recipe.title, recipe_path(recipe) %></h4>
+          <p><%= link_to recipe.description, recipe_path(recipe) %></p>
+        </div>
+      </div>
   <% end %>
-  </ul>
 </div>
