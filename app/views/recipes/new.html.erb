@@ -5,27 +5,20 @@
   <label><h3>Description:</h3>
   <%= f.text_area :description, placeholder: "Recipe description" %>
   </label>
-  <fieldset class="large-6 columns">
-    <label><h4>Ingredients:</h4>
-    <%= f.text_area :ingredient, placeholder: "Ingredients used in recipe.", rows: 15 %>
-    </label>
-  </fieldset>
-  <fieldset class="large-6 columns">
-    <label><h4>Directions:</h4>
-    <%= f.text_area :direction, placeholder: "Explain what to do.", rows: 15 %>
-  </label>
-  </fieldset>
-  <fieldset class="large-6 columns">
-    <label><h4>Ingredients:</h4>
-    <%= f.text_area :ingredient, placeholder: "Ingredients used in recipe.", rows: 15 %>
-    </label>
-  </fieldset>
   <fieldset class="large-6 columns" id="ingredients">
     <%= f.fields_for :ingredients do |ingredient| %>
       <%= render 'ingredient_fields', :f => ingredient %>
     <% end %>
     <div class="links">
       <%= link_to_add_association 'Add Ingredient', f, :ingredients, class: "large button" %>
+    </div>
+  </fieldset>
+  <fieldset class="large-6 columns" id="ingredients">
+    <%= f.fields_for :directions do |direction| %>
+      <%= render 'direction_fields', :f => direction %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Step', f, :directions, class: "large button" %>
     </div>
   </fieldset>
   <%= f.submit class: "large button" %><br/>
