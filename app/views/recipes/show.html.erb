@@ -37,7 +37,7 @@
   <% if user_signed_in? && current_user == @recipe.user %>
     <div class="buttons">
       <row>
-        <%= link_to "Edit Recipe", edit_recipe_path, class: "warning button" %>
+        <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "warning button" %>
         <%= link_to "Delete recipe", @recipe, method: :delete, data: {confirm: "Are you sure?"}, class: "alert button" %>
       </row>
     </div>

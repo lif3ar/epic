@@ -10,6 +10,14 @@
           <h4><%= link_to recipe.title, recipe_path(recipe) %></h4>
           <p><%= link_to recipe.description, recipe_path(recipe) %></p>
         </div>
+        <% if user_signed_in? && current_user == recipe.user %>
+          <div class="buttons">
+            <row>
+              <%= link_to "Edit Recipe", edit_recipe_path(recipe[:id]), class: "warning button" %>
+              <%= link_to "Delete recipe", recipe, method: :delete, data: {confirm: "Are you sure?"}, class: "alert button" %>
+            </row>
+          </div>
+        <% end %>
       </div>
   <% end %>
 </div>

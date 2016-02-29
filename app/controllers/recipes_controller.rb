@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update]
+  before_action :set_recipe, only: [:show, :edit, :update, :edit, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   
   def index
@@ -27,11 +27,10 @@ class RecipesController < ApplicationController
   end
   
   def edit
-    
   end
   
   def update
-    if @recipe.save
+    if @recipe.update(recipe_params)
       flash[:success] = "Recipe has been edited"
       redirect_to recipe_path(@recipe)
     else
@@ -41,7 +40,6 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
     flash[:notice] = "Recipe has been deleted"
     redirect_to root_path
